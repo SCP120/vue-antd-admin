@@ -72,12 +72,20 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/language/list/list'),
             },
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/language/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/language/edit/edit'),
             },
 
           ]

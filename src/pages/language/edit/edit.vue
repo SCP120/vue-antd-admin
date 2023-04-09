@@ -1,84 +1,83 @@
 <template>
-  <a-card :body-style="{ padding: '24px 32px' }" :bordered="false">
-    <a-form>
-      <a-form-item :label="$t('name')" :labelCol="{ span: 7 }" :wrapperCol="{ span: 10 }">
-        <a-input
-          :placeholder="$t('nameInput')"
-          name="name.name"
-          :value="data.name.name"
-          @change="setNestedProperty"
-        />
-      </a-form-item>
+    <div>
+        <a-card class="card"  :bordered="false">
+            <a-form>
+                <a-form-item :label="$t('name')" :labelCol="{ span: 7 }" :wrapperCol="{ span: 10 }">
+                    <a-input
+                            :placeholder="$t('nameInput')"
+                            name="name"
+                            :value="data.name"
+                            @change="onChanged"
+                    />
+                </a-form-item>
+                <a-form-item
+                        :label="$t('codeInput')"
+                        :labelCol="{ span: 7 }"
+                        :wrapperCol="{ span: 10 }"
+                >
+                    <a-input
+                            :placeholder="$t('codeInput')"
+                            :value="data.code"
+                            @change="onChanged"
+                            :name="'code'"
+                    />
+                </a-form-item>
 
-      <a-form-item
-        :label="$t('bankName')"
-        :labelCol="{ span: 7 }"
-        :wrapperCol="{ span: 10 }"
-      >
-        <a-select
-          :placeholder="$t('bankNameSelect')"
-          dropdownClassName="name.bank"
-          :value="data.name.bank"
-          @change="setNestedPropertySelect"
-          v-decorator="[
-            'repository.manager',
-            { rules: [{ required: true, message: $t('bankNameSelect') }] },
-          ]"
-        >
-          <a-select-option
-            dropdownClassName="name.bank"
-            v-for="(item, index) in bankNameList"
-            :value="item"
-            :key="index"
-            >{{ item }}</a-select-option
-          >
-        </a-select>
-      </a-form-item>
+                <a-form-item
+                        :label="$t('image')"
+                        :labelCol="{ span: 7 }"
+                        :wrapperCol="{ span: 10 }"
+                >
+                </a-form-item>
 
-      <a-form-item
-        :label="$t('bankAccount')"
-        :labelCol="{ span: 7 }"
-        :wrapperCol="{ span: 10 }"
-      >
-        <a-input
-          :placeholder="$t('bankAccountInput')"
-          :value="data.value"
-          @change="onChanged"
-          :name="'value'"
-        />
-      </a-form-item>
+                <a-form-item style="margin-top: 24px" :wrapperCol="{ span: 10, offset: 7 }">
+                    <a-button style="margin-left: 8px" @click="send">{{ $t("save") }}</a-button>
+                </a-form-item>
+            </a-form>
+        </a-card>
+        <a-card class="card" :title="$t('pageAll')" :bordered="false">
+            <page-all ref="pageAll" :langData="data" :showSubmit="true" />
+        </a-card>
+        <a-card class="card" :title="$t('languageAll')" :bordered="false">
+            <langauge-all ref="langaugeAll" :langData="data" :showSubmit="true" />
 
-      <a-form-item
-        :label="$t('image')"
-        :labelCol="{ span: 7 }"
-        :wrapperCol="{ span: 10 }"
-      >
-      </a-form-item>
+        </a-card>
 
-      <a-form-item style="margin-top: 24px" :wrapperCol="{ span: 10, offset: 7 }">
-        <a-button style="margin-left: 8px" @click="send">{{ $t("save") }}</a-button>
-      </a-form-item>
-    </a-form>
-  </a-card>
+
+    </div>
+
+
+
 </template>
 
 <script>
+import langaugeAll from "@/pages/language/edit/languageAll.vue";
+import pageAll from "@/pages/language/edit/pageAll.vue";
+
+
 export default {
   name: "BasicForm",
+    components: {langaugeAll, pageAll},
   i18n: require("./i18n"),
   data() {
     const data = {
-      id: 1,
-      name: {
-        name: "John Doe",
-        bank: "Bank of America",
-      },
-      value: "ABC123DEF4",
-      image: "https://picsum.photos/200/300",
-      status: 1,
+        "id": 2,
+        "name": "English",
+        "code": "en",
+        "image": "/upload/images/files/download%20(1).png",
+        "value": "{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}",
+        "page_value": "{\"All\":{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}}",
+        "status": null,
+        "created_at": "2023-02-14 22:10:59",
+        "updated_at": "2023-03-03 14:07:10",
+        "test": ""
     };
+    const value = JSON.parse(data.value);
+    const page_value = JSON.parse(data.page_value);
     return {
       data,
+        value,
+        page_value,
     };
   },
   created() {
@@ -166,4 +165,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style lang="less" scoped>
+.card{
+    margin-bottom: 24px;
+}
+</style>
