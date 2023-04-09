@@ -27,5 +27,15 @@ module.exports = {
       range: 'Weekly Range',
       introduce: 'Introduce'
     },
+    VN: {
+      search: 'Tìm kiếm người dùng',
+      capita: 'Số lần tìm kiếm trung bình',
+      rank: 'Xếp hạng',
+      keyword: 'Từ khóa tìm kiếm',
+      count: 'Số lượng người dùng',
+      range: 'Tăng trưởng trong tuần',
+      introduce: 'Giới thiệu chỉ số'
+      
+    }
   }
 }

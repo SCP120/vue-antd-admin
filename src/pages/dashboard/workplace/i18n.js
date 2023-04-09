@@ -36,5 +36,18 @@ module.exports = {
       team: 'Team',
       add: 'Add'
     },
+    VN: {
+      project: 'Dự án',
+      ranking: 'Xếp hạng',
+      visit: 'Truy cập',
+      progress: 'Dự án đang thực hiện',
+      all: 'Tất cả dự án',
+      access: 'Bắt đầu nhanh',
+      dynamic: 'Hoạt động',
+      degree: 'Chỉ số',
+      team: 'Nhóm',
+      add: 'Thêm'
+      
+    }
   }
 }

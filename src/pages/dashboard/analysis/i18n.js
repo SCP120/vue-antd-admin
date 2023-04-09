@@ -68,6 +68,30 @@ module.exports = {
       all: 'All',
       online: 'Online',
       stores: 'Stores',
+    },
+    VN: {
+      introduce: 'Giới thiệu ',
+      totalSales: 'Tổng doanh thu',
+      visits: 'Lượt truy cập',
+      payments: 'thanh toán',
+      operating: 'Hiệu quả hoạt động',
+      wow: 'So với tuần trước',
+      dod: 'So với ngày trước',
+      sales: 'Doanh thu',
+      daily: 'Trung bình',
+      day: 'Hôm nay',
+      week: 'Tuần này',
+      month: 'Tháng này',
+      year: 'Năm nay',
+      search: 'Tìm kiếm nhiều',
+      proportion: 'Tỷ lệ doanh thu',
+      conversion: 'Tỷ lệ chuyển đổi',
+      trend: 'Trend',
+      ranking: 'Bảng xếp hạng',
+      all: 'Tất cả',
+      online: 'Trực tuyến',
+      stores: 'Cửa hàng',
+
     }
   }
 }

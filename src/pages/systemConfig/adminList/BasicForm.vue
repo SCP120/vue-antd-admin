@@ -58,7 +58,7 @@
         :label="$t('disclosure')"
         :labelCol="{span: 7}"
         :wrapperCol="{span: 10}"
-        :required="true"
+        :required="false"
         :help="$t('disclosureDesc')"
       >
         <a-radio-group v-model="value">

@@ -1,6 +1,6 @@
-import TabsView from '@/layouts/tabs/TabsView'
 import BlankView from '@/layouts/BlankView'
 import PageView from '@/layouts/PageView'
+import TabsView from '@/layouts/tabs/TabsView'
 
 // 路由配置
 const options = {
@@ -27,23 +27,280 @@ const options = {
       redirect: '/login',
       children: [
         {
+          path: 'bank',
+          name: 'Bank',
+          meta: {
+            icon: 'bank',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/bank/list/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/bank/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/bank/edit/edit'),
+            },
+
+          ]
+        },
+        {
+          path: 'language',
+          name: 'Language',
+          meta: {
+            icon: 'global',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+
+          ]
+        },
+        {
+          path: 'pictures',
+          name: 'Pictures',
+          meta: {
+            icon: 'picture',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+            {
+              path: 'popupList',
+              name: 'popupList',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+
+          ]
+        },
+        {
+          path: 'categories',
+          name: 'Categories',
+          meta: {
+            icon: 'bars',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+
+          ]
+        },
+        {
+          path: 'articles', //bài báo
+          name: 'articles',
+          meta: {
+            icon: 'book',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+
+          ]
+        },
+        {
+          path: 'campaigns',
+          name: 'campaigns',
+          meta: {
+            icon: 'project',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+            {
+              path: 'result',
+              name: 'Result',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+
+          ]
+        },
+        {
+          path: 'campaignMission',
+          name: 'campaignMission',
+          meta: {
+            icon: 'exclamation',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+
+          ]
+        },
+        {
+          path: 'partners',
+          name: 'partners',
+          meta: {
+            icon: 'team',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'new',
+              name: 'New',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+            {
+              path: 'exchange',//đổi số dư
+              name: 'exchange',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+
+          ]
+        },
+        {
+          path: 'manageResult',
+          name: 'manageResult',
+          meta: {
+            icon: 'user',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: 'List',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+          ]
+        },
+        {
+          path: 'payment',
+          name: 'payment',
+          meta: {
+            icon: 'credit-card',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'listIn',
+              name: 'listIn',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'listOut',
+              name: 'listOut',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+          ]
+        },
+
+        {
           path: 'dashboard',
-          name: 'Dashboard',
+          name: 'platform-home',
           meta: {
             icon: 'dashboard'
           },
           component: BlankView,
           children: [
-            {
-              path: 'workplace',
-              name: '工作台',
-              meta: {
-                page: {
-                  closable: false
-                }
-              },
-              component: () => import('@/pages/dashboard/workplace'),
-            },
+            // {
+            //   path: 'workplace',
+            //   name: '工作台',
+            //   meta: {
+            //     page: {
+            //       closable: false
+            //     }
+            //   },
+            //   component: () => import('@/pages/dashboard/workplace'),
+            // },
             {
               path: 'analysis',
               name: '分析页',
@@ -76,6 +333,35 @@ const options = {
               path: 'advance',
               name: '高级表单',
               component: () => import('@/pages/form/advance'),
+            }
+          ]
+        },
+
+        {
+          path: 'systemConfig',
+          name: '表单页',
+          meta: {
+            icon: 'form',
+            page: {
+              cacheAble: false
+            }
+          },
+          component: PageView,
+          children: [
+            {
+              path: 'list',
+              name: '基础表单',
+              component: () => import('@/pages/systemConfig/list'),
+            },
+            {
+              path: 'adminGroup',
+              name: '分步表单',
+              component: () => import('@/pages/systemConfig/adminGroup'),
+            },
+            {
+              path: 'adminList',
+              name: '高级表单',
+              component: () => import('@/pages/systemConfig/adminList'),
             }
           ]
         },
