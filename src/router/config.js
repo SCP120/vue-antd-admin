@@ -133,12 +133,20 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/categories/list/list'),
             },
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/categories/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/categories/edit/edit'),
             },
 
           ]
@@ -157,12 +165,20 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/articles/list/list'),
             },
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/articles/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/articles/edit/edit'),
             },
 
           ]

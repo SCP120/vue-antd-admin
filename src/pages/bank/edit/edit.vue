@@ -67,6 +67,7 @@ export default {
   name: "BasicForm",
   i18n: require("./i18n"),
   data() {
+      console.log(this.$route.query);
     const data = {
       id: 1,
       name: {
