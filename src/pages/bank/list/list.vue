@@ -98,48 +98,48 @@
         :pagination="{ ...pagination, onChange: onPageChange }"
         @selectedRowChange="onSelectChange"
       >
-        <template slot="image-column" slot-scope="imageUrl">
-          <img :src="imageUrl.text" />
+        <template slot="image-column" slot-scope="image">
+          <img :src="image.text" />
         </template>
         <template slot="status-column" slot-scope="status">
           <span
-            v-if="status.text == 'active'" 
+            v-if="status.text == null"
             style="
-                  background-color: green;
-                  color: white;
-                  padding: 4px 8px;
-                  border-radius: 4px;
-                  display: inline-block;
-                "
+              background-color: green;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              display: inline-block;
+            "
           >
-            {{ status.text }}
+            active
           </span>
           <span
-            v-if="status.text == 'inactive'" 
+            v-if="status.text == 1"
             style="
-                  background-color: red;
-                  color: white;
-                  padding: 4px 8px;
-                  border-radius: 4px;
-                  display: inline-block;
-                "
+              background-color: red;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              display: inline-block;
+            "
           >
-            {{ status.text }}
+           inactive
           </span>
-          
         </template>
 
         <div slot="description" slot-scope="{ text }">
           {{ text }}
         </div>
         <div slot="action" slot-scope="{ text, record }">
-         
-          <a style="margin-right: 8px"> <a-icon type="edit" /> <router-link :to="`/bank/edit/edit/${record.id}`">edit</router-link> </a>
+          <a style="margin-right: 8px">
+            <a-icon type="edit" />
+            <router-link :to="`/bank/edit/edit/${record.id}`">edit</router-link>
+          </a>
           <a @click="deleteRecord(record.id)"> <a-icon type="delete" />delete </a>
           <!-- <a @click="deleteRecord(record.key)" v-auth="`delete`">
             <a-icon type="delete" />删除2
           </a> -->
-         
         </div>
         <template slot="statusTitle">
           <a-icon @click.native="onStatusTitleClick" type="info-circle" />
@@ -159,8 +159,8 @@ const columns = [
   },
   {
     title: "Account",
-    dataIndex: "accountID",
-    scopedSlots: { customRender: "accountID" },
+    dataIndex: "value",
+    scopedSlots: { customRender: "value" },
   },
   // {
   //   title: "Name",
@@ -171,19 +171,19 @@ const columns = [
   // },
   {
     title: "Image",
-    dataIndex: "imageUrl",
-    key: "imageUrl",
+    dataIndex: "image",
+    key: "image",
     scopedSlots: { customRender: "image-column" },
   },
   {
     title: "Name",
-    dataIndex: "accountName",
+    dataIndex: "name.name",
   },
 
   {
-    dataIndex: "Bank",
+    title: "Bank",
+    dataIndex: "name.bank",
     needTotal: true,
-    slots: { title: "bankName" },
   },
   {
     title: "Status",
@@ -233,102 +233,127 @@ export default {
       }).then((res) => {
         const { list, page, pageSize, total } = res?.data?.data ?? {};
         console.log(list);
+
         this.dataSource = [
           {
             id: 1,
-            accountID: "ABC123DEF4",
-            accountName: "John Doe",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Bank of America",
-            status: "active",
+            name: {
+              name: "John Doe",
+              bank: "Bank of America",
+            },
+            value: "ABC123DEF4",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 2,
-            accountID: "XYZ456GHI7",
-            accountName: "Jane Smith",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Wells Fargo",
-            status: "inactive",
+            name: {
+              name: "Jane Smith",
+              bank: "Wells Fargo",
+            },
+            value: "XYZ456GHI7",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
           {
             id: 3,
-            accountID: "LMN789OPQ1",
-            accountName: "Robert Johnson",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Chase",
-            status: "active",
+            name: {
+              name: "Robert Johnson",
+              bank: "Chase",
+            },
+            value: "LMN789OPQ1",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 4,
-            accountID: "RST234UVW5",
-            accountName: "Emily Nguyen",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Citibank",
-            status: "inactive",
+            name: {
+              name: "Emily Nguyen",
+              bank: "Citibank",
+            },
+            value: "RST234UVW5",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
           {
             id: 5,
-            accountID: "DEF567GHI8",
-            accountName: "David Lee",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Bank of America",
-            status: "active",
+            name: {
+              name: "David Lee",
+              bank: "Bank of America",
+            },
+            value: "DEF567GHI8",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 6,
-            accountID: "JKL901MNO2",
-            accountName: "Samantha Kim",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Wells Fargo",
-            status: "inactive",
+            name: {
+              name: "Samantha Kim",
+              bank: "Wells Fargo",
+            },
+            value: "JKL901MNO2",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
           {
             id: 7,
-            accountID: "PQR345STU9",
-            accountName: "Michael Johnson",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Chase",
-            status: "active",
+            name: {
+              name: "Michael Johnson",
+              bank: "Chase",
+            },
+            value: "PQR345STU9",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 8,
-            accountID: "VWX678YZA3",
-            accountName: "Jennifer Smith",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Citibank",
-            status: "inactive",
+            name: {
+              name: "Jennifer Smith",
+              bank: "Citibank",
+            },
+            value: "VWX678YZA3",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
           {
             id: 9,
-            accountID: "BCD123EFG4",
-            accountName: "Kevin Lee",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Bank of America",
-            status: "active",
+            name: {
+              name: "Kevin Lee",
+              bank: "Bank of America",
+            },
+            value: "BCD123EFG4",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 10,
-            accountID: "GHI456JKL7",
-            accountName: "Jessica Park",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Wells Fargo",
-            status: "inactive",
+            name: {
+              name: "Jessica Park",
+              bank: "Wells Fargo",
+            },
+            value: "GHI456JKL7",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
           {
             id: 11,
-            accountID: "MNO789PQR1",
-            accountName: "William Johnson",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Chase",
-            status: "active",
+            name: {
+              name: "William Johnson",
+              bank: "Chase",
+            },
+            value: "MNO789PQR1",
+            image: "https://picsum.photos/200/300",
+            status: 1,
           },
           {
             id: 12,
-            accountID: "STU234VWX5",
-            accountName: "Linda Smith",
-            imageUrl: "https://picsum.photos/200/300",
-            bankName: "Citibank",
-            status: "inactive",
+            name: {
+              name: "Linda Smith",
+              bank: "Citibank",
+            },
+            value: "STU234VWX5",
+            image: "https://picsum.photos/200/300",
+            status: null,
           },
         ];
         this.pagination.current = page;
