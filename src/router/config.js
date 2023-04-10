@@ -197,19 +197,21 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/campaigns/list/list'),
             },
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/campaigns/new/new'),
             },
             {
-              path: 'result',
-              name: 'Result',
-              component: () => import('@/pages/systemConfig/list'),
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/campaigns/edit/edit'),
             },
-
           ]
         },
         {
