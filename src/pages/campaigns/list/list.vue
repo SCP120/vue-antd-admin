@@ -9,16 +9,16 @@
         <a-card>
             <div>
                 <!-- <a-space class="operator">
-                        <a-button @click="addNew" type="primary">新建</a-button>
-                        <a-button>批量操作</a-button>
-                        <a-dropdown>
-                          <a-menu @click="handleMenuClick" slot="overlay">
-                            <a-menu-item key="delete">删除</a-menu-item>
-                            <a-menu-item key="audit">审批</a-menu-item>
-                          </a-menu>
-                          <a-button> 更多操作 <a-icon type="down" /> </a-button>
-                        </a-dropdown>
-                      </a-space> -->
+                       <a-button @click="addNew" type="primary">新建</a-button>
+                       <a-button>批量操作</a-button>
+                       <a-dropdown>
+                         <a-menu @click="handleMenuClick" slot="overlay">
+                           <a-menu-item key="delete">删除</a-menu-item>
+                           <a-menu-item key="audit">审批</a-menu-item>
+                         </a-menu>
+                         <a-button> 更多操作 <a-icon type="down" /> </a-button>
+                       </a-dropdown>
+                     </a-space> -->
                 <standard-table
                         :columns="columns"
                         :dataSource="dataSource"
@@ -58,6 +58,19 @@
 
                     <div slot="description" slot-scope="{ text }">
                         {{ text }}
+                    </div>
+
+                    <div slot = "date-public-column" slot-scope="date_public">
+
+                        <div>
+                            <p>{{formatTime(date_public.text)}}</p>
+                        </div>
+                    </div>
+                    <div slot = "date-end-column" slot-scope="date_end">
+
+                        <div>
+                            <p>{{formatTime(date_end.text)}}</p>
+                        </div>
                     </div>
                     <div slot="action" slot-scope="{  record }">
                         <a style="margin-right: 8px">
@@ -111,25 +124,30 @@ const columns = [
         title: "Public Date",
         dataIndex: "date_public",
         key: "date_public",
-        render: (record) => {
-            return (
-                <div>
-                    <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
-                </div>
-            );
-        },
+        scopedSlots: {customRender: "date-public-column"},
+
+        // render: (record) => {
+        //     console.log(record);
+        //     return (
+        //         <div>
+        //             <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
+        //         </div>
+        //     );
+        // },
     },
     {
         title: "End Date",
         dataIndex: "date_end",
         key: "date_end",
-        render: (record) => {
-            return (
-                <div>
-                    <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
-                </div>
-            );
-        },
+        scopedSlots: {customRender: "date-end-column"},
+
+        // render: (record) => {
+        //     return (
+        //         <div>
+        //             <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
+        //         </div>
+        //     );
+        // },
     },
     {
         title: "Status",
@@ -167,6 +185,13 @@ export default {
         this.getData();
     },
     methods: {
+        formatTime(time){
+            const result = moment(time).format("DD-MM-YYYY");
+            if (result === "Invalid date") {
+                return "no date";
+            }
+            return result
+        },
         onPageChange(page, pageSize) {
             this.pagination.current = page;
             this.pagination.pageSize = pageSize;
@@ -177,8 +202,8 @@ export default {
                 page: this.pagination.current,
                 pageSize: this.pagination.pageSize,
             }).then((res) => {
-                const {list, page, pageSize, total} = res?.data?.data ?? {};
-                console.log(list);
+                const { page, pageSize, total} = res?.data?.data ?? {};
+
                 
                 this.dataSource = [
                     {
@@ -190,7 +215,7 @@ export default {
                         "link_": null,
                         "image": null,
                         "list_task": "[\"\u0110\u0103ng b\u00e0i gi\u1edbi thi\u1ec7u tr\u00ean trang FACEBOOK, ZALO c\u00e1 nh\u00e2n 2 l\u1ea7n tr\u00ean ng\u00e0y v\u00e0 gi\u1edbi thi\u1ec7u t\u1ed1i thi\u1ec3u 2 th\u00e0nh vi\u00ean \u0111\u0103ng k\u00fd m\u1edbi v\u00e0 li\u00ean k\u1ebft ng\u00e2n h\u00e0ng th\u00e0nh c\u00f4ng tr\u00ean trang Mccannasia.com\"]",
-                        "date_public": null,
+                        "date_public": "2023-03-03 14:54:30",
                         "date_end": null,
                         "price_day": null,
                         "registration_fee": 2000000,

@@ -21,9 +21,9 @@ module.exports = {
       date: 'Effective Date',
       type: 'Repository Type',
       content: "Content",
-        key: "Key",
+      key: "Key",
       languageAll:"Name page: Language",
-        description: "Description",
+      description: "Description",
     },
     VN: {
       input: 'Vui lòng nhập',
@@ -36,7 +36,7 @@ module.exports = {
       date: 'Ngày hiệu lực',
       type: 'Loại kho',
       key: "Key",
-        languageAll:"Tên trang: Ngôn ngữ",
+      languageAll:"Tên trang: Ngôn ngữ",
       description: "Mô tả",
     }
   }

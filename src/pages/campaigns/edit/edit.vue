@@ -1,55 +1,5 @@
 <template>
     <div>
-<!--        <a-card class="card"  :bordered="false">-->
-<!--            <a-form>-->
-<!--                <a-form-item :label="$t('name')" :labelCol="{ span: 7 }" :wrapperCol="{ span: 10 }">-->
-<!--                    <a-input-->
-<!--                            :placeholder="$t('nameInput')"-->
-<!--                            name="name"-->
-<!--                            :value="data.name"-->
-<!--                            @change="onChanged"-->
-<!--                    />-->
-<!--                </a-form-item>-->
-<!--                <a-form-item-->
-<!--                        :label="$t('codeInput')"-->
-<!--                        :labelCol="{ span: 7 }"-->
-<!--                        :wrapperCol="{ span: 10 }"-->
-<!--                >-->
-<!--                    <a-input-->
-<!--                            :placeholder="$t('codeInput')"-->
-<!--                            :value="data.code"-->
-<!--                            @change="onChanged"-->
-<!--                            :name="'code'"-->
-<!--                    />-->
-<!--                </a-form-item>-->
-
-<!--                <a-form-item-->
-<!--                        :label="$t('image')"-->
-<!--                        :labelCol="{ span: 7 }"-->
-<!--                        :wrapperCol="{ span: 10 }"-->
-<!--                >-->
-<!--                </a-form-item>-->
-
-<!--                <a-form-item style="margin-top: 24px" :wrapperCol="{ span: 10, offset: 7 }">-->
-<!--                    <a-button style="margin-left: 8px" @click="send">{{ $t("save") }}</a-button>-->
-<!--                </a-form-item>-->
-<!--            </a-form>-->
-<!--        </a-card>-->
-
-<!--        <a-card-->
-<!--            style="margin-top: 24px"-->
-<!--            :bordered="false"-->
-<!--            :tabList="tabList"-->
-<!--            :activeTabKey="activeTabKey.value"-->
-<!--            @tabChange="key => onTabChange(key, 'key')"-->
-<!--        >-->
-
-<!--            <input-box  v-if="activeTabKey.value === '1'" ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/>-->
-<!--            <input-box  v-else-if="activeTabKey.value === '2'" ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" />-->
-<!--            <input-box  v-else-if="activeTabKey.value === '3'" ref="inputBox" :langData="data" :showSubmit="true" :type="'EN'" />-->
-
-
-<!--        </a-card>-->
         <a-card>
             <a-tabs >
                 <a-tab-pane key="1" tab="Tab 1" > <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/></a-tab-pane>
