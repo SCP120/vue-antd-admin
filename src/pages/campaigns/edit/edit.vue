@@ -69,14 +69,11 @@
 </template>
 
 <script>
-import Vue from "vue";
 
 
 import inputBox from "@/pages/campaigns/edit/inputbox.vue";
-import VueCompositionApi from '@vue/composition-api'
-import {ref} from "@vue/composition-api";
 
-Vue.use(VueCompositionApi)
+
 export default {
   name: "BasicForm",
     components: {inputBox},
@@ -98,8 +95,8 @@ export default {
               tab: 'US'
           }
       ];
-      const activeTabKey = ref('1');
-      const noTitleKey = ref('app');
+      const activeTabKey = '1';
+      const noTitleKey = 'app';
 
       console.log(activeTabKey)
 
