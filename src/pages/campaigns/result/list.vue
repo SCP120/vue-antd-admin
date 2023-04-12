@@ -8,16 +8,17 @@
         </a-card>
         <a-card>
             <div>
-                <a-space class="operator">
-                        <!-- <a-button @click="addNew" type="primary">Add new</a-button> -->
-                        <!-- <a-dropdown>
-                          <a-menu @click="handleMenuClick" slot="overlay">
-                            <a-menu-item key="delete">删除</a-menu-item>
-                            <a-menu-item key="audit">审批</a-menu-item>
-                          </a-menu>
-                          <a-button> 更多操作 <a-icon type="down" /> </a-button>
-                        </a-dropdown> -->
-                      </a-space>
+                <!-- <a-space class="operator">
+                       <a-button @click="addNew" type="primary">新建</a-button>
+                       <a-button>批量操作</a-button>
+                       <a-dropdown>
+                         <a-menu @click="handleMenuClick" slot="overlay">
+                           <a-menu-item key="delete">删除</a-menu-item>
+                           <a-menu-item key="audit">审批</a-menu-item>
+                         </a-menu>
+                         <a-button> 更多操作 <a-icon type="down" /> </a-button>
+                       </a-dropdown>
+                     </a-space> -->
                 <standard-table
                         :columns="columns"
                         :dataSource="dataSource"
@@ -112,7 +113,6 @@ const columns = [
     {
         title: "Name",
         dataIndex: "name",
-        width: "20%",
     },
     {
         title: "Image",
@@ -139,13 +139,15 @@ const columns = [
         title: "End Date",
         dataIndex: "date_end",
         key: "date_end",
-        render: (record) => {
-            return (
-                <div>
-                    <p>{moment(record.date_end).format("DD-MM-YYYY")}</p>
-                </div>
-            );
-        },
+        scopedSlots: {customRender: "date-end-column"},
+
+        // render: (record) => {
+        //     return (
+        //         <div>
+        //             <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
+        //         </div>
+        //     );
+        // },
     },
     {
         title: "Status",
@@ -196,14 +198,49 @@ export default {
             this.getData();
         },
         getData() {
-            request(process.env.VUE_APP_API_BASE_URL + "/campain", "get", {
+            request(process.env.VUE_APP_API_BASE_URL + "/list", "get", {
                 page: this.pagination.current,
                 pageSize: this.pagination.pageSize,
             }).then((res) => {
-                const {data, current_page: page, per_page: pageSize, total} = res?.data?.items ?? {};
-                console.log(data);
-                
-                this.dataSource = data
+                const { page, pageSize, total} = res?.data?.data ?? {};
+
+
+                this.dataSource = [
+                    {
+                        "id" : 2,
+                        "campain" : 1,
+                        "user" : 1,
+                        "resuft" : "{\"1\":[\"/upload/images/files/1.PNG\",\"/upload/images/files/download%20(1).png\",\"/upload/images/files/Flag_of_Vietnam_svg.png\"],\"2\":[\"/upload/images/files/Flag_of_Vietnam_svg.png\"]}",
+                        "status" : 0,
+                        "campain_name" : "{\"en\":\"What is Lorem Ipsum?\",\"vi\":\"What is Lorem Ipsum? viet nam\"}",
+                        "user_name" : "Supper Admin",
+                        "image" : "{\"en\":\"/upload/images/files/download%20(1).png\",\"vi\":\"/upload/images/files/Flag_of_Vietnam_svg.png\"}",
+                        "list_task" : "{\"en\":[null,\"Chia s\u1ebb  3 forum facebook english\",\"chia s\u1ebb voz end\"],\"vi\":[null,\"Chia s\u1ebb v\u00e0o voz 1\",\"Chia s\u1ebb v\u00e0o voz2\"]}",
+                        "price" : 5000,
+                        "created_at" : "2023-02-15 23:24:07",
+                        "updated_at" : "2023-02-15 23:34:13",
+                        "use_" : null,
+                        "date" : null,
+                        "resuft_explain" : null
+                    },
+                    {
+                        "id" : 3,
+                        "campain" : 4,
+                        "user" : 3,
+                        "resuft" : "[[\"/upload/images/files/1.PNG\",\"/upload/images/files/download%20(1).png\"]]",
+                        "status" : 1,
+                        "campain_name" : "Bank Số Đẹp",
+                        "user_name" : "Đại lý 1",
+                        "image" : null,
+                        "list_task" : "[\"\u0110\u0103ng ba\u0300i gi\u01a1i thi\u00ea\u0323u v\u00ea\u0300 app tr\u00ean trang facebook ca\u0301 nh\u00e2n, va\u0300 zalo ca\u0301 nh\u00e2n 1 nga\u0300y 2 l\u00e2\u0300n.\nM\u00f4\u0303i tu\u00e2\u0300n m\u01a1i t\u00f4\u0301i thi\u00ea\u0309u 1 tha\u0300nh vi\u00ean \u0111\u0103ng ky\u0301 tha\u0300nh c\u00f4ng ta\u0300i khoa\u0309n tr\u00ean trang web McCannasia.com\"]",
+                        "price" : 150000,
+                        "created_at" : "2023-02-27 02:59:09",
+                        "updated_at" : "2023-02-27 03:46:02",
+                        "use_" : "",
+                        "date" : "27-02-2023",
+                        "resuft_explain" : null
+                    }
+                ];
 
                 this.pagination.current = page;
                 this.pagination.pageSize = pageSize;
