@@ -22,7 +22,7 @@
                         :columns="columns"
                         :dataSource="dataSource"
 
-                        :pagination="{ ...pagination, onChange: onPageChange }"
+
 
                 >
                     <template slot="image-column" slot-scope="image">
@@ -102,46 +102,44 @@ const columns = [
         width: "20%",
     },
     {
-        title: "Image",
-        dataIndex: "image",
-        key: "image",
-        scopedSlots: {customRender: "image-column"},
+        title: "Email",
+        dataIndex: "email",
     },
     {
-        title: "Public Date",
-        dataIndex: "date_public",
+        title: "Amount",
+        dataIndex: "amount",
+    },
+    {
+        title: "Phone",
+        dataIndex: "phone",
+    },
+
+    {
+        title: "Mission",
+        dataIndex: "content",
         key: "date_public",
-        render: (record) => {
+        render: ({content}) => {
             return (
-                <div>
-                    <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
-                </div>
+                <div v-html={content}/>
             );
         },
     },
     {
-        title: "End Date",
-        dataIndex: "date_end",
-        key: "date_end",
+        title: "Last login",
+        dataIndex: "last_login_time",
         render: (record) => {
             return (
                 <div>
-                    <p>{moment(record.date_end).format("DD-MM-YYYY")}</p>
+                    <p>{moment(record.last_login_time).format("DD-MM-YYYY")}</p>
+                    <p>{record.last_login_ip}</p>
                 </div>
             );
         },
     },
-    {
-        title: "Status",
-        dataIndex: "status",
-        key: "status",
-        scopedSlots: {customRender: "status-column"},
-        sorter: (a, b) => a.status.localeCompare(b.status),
-    },
-    {
-        title: "Action",
-        scopedSlots: {customRender: "action"},
-    },
+    // {
+    //     title: "Action",
+    //     scopedSlots: {customRender: "action"},
+    // },
 ];
 
 export default {
@@ -153,11 +151,11 @@ export default {
             columns: columns,
             dataSource: [],
             selectedRows: [],
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                total: 0,
-            },
+            // pagination: {
+            //     current: 1,
+            //     pageSize: 10,
+            //     total: 0,
+            // },
         };
     },
     // authorize: {
@@ -167,24 +165,24 @@ export default {
         this.getData();
     },
     methods: {
-        onPageChange(page, pageSize) {
-            this.pagination.current = page;
-            this.pagination.pageSize = pageSize;
-            this.getData();
-        },
+        // onPageChange(page, pageSize) {
+        //     this.pagination.current = page;
+        //     this.pagination.pageSize = pageSize;
+        //     this.getData();
+        // },
         getData() {
-            request(process.env.VUE_APP_API_BASE_URL + "/campain", "get", {
-                page: this.pagination.current,
-                pageSize: this.pagination.pageSize,
+            request(process.env.VUE_APP_API_BASE_URL + "/agency", "get", {
+                // page: this.pagination.current,
+                // pageSize: this.pagination.pageSize,
             }).then((res) => {
-                const {data, current_page: page, per_page: pageSize, total} = res?.data?.items ?? {};
+                const data = res?.data?.items ?? {};
                 console.log(data);
                 
                 this.dataSource = data
 
-                this.pagination.current = page;
-                this.pagination.pageSize = pageSize;
-                this.pagination.total = total;
+                // this.pagination.current = page;
+                // this.pagination.pageSize = pageSize;
+                // this.pagination.total = total;
             });
         },
         deleteRecord(id) {

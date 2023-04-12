@@ -90,35 +90,35 @@ const options = {
 
           ]
         },
-        {
-          path: 'pictures',
-          name: 'Pictures',
-          meta: {
-            icon: 'picture',
-            page: {
-              cacheAble: false
-            }
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'list',
-              name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
-            },
-            {
-              path: 'new',
-              name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
-            },
-            {
-              path: 'popupList',
-              name: 'popupList',
-              component: () => import('@/pages/systemConfig/list'),
-            },
+        // {
+        //   path: 'pictures',
+        //   name: 'Pictures',
+        //   meta: {
+        //     icon: 'picture',
+        //     page: {
+        //       cacheAble: false
+        //     }
+        //   },
+        //   component: PageView,
+        //   children: [
+        //     {
+        //       path: 'list',
+        //       name: 'List',
+        //       component: () => import('@/pages/systemConfig/list'),
+        //     },
+        //     {
+        //       path: 'new',
+        //       name: 'New',
+        //       component: () => import('@/pages/systemConfig/adminGroup'),
+        //     },
+        //     {
+        //       path: 'popupList',
+        //       name: 'popupList',
+        //       component: () => import('@/pages/systemConfig/list'),
+        //     },
 
-          ]
-        },
+        //   ]
+        // },
         {
           path: 'categories',
           name: 'Categories',
@@ -228,7 +228,7 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/campaignMission/list/list'),
             },
             {
               path: 'new',
@@ -252,18 +252,18 @@ const options = {
             {
               path: 'list',
               name: 'List',
-              component: () => import('@/pages/systemConfig/list'),
+              component: () => import('@/pages/agency/list/list'),
             },
             {
               path: 'new',
               name: 'New',
               component: () => import('@/pages/systemConfig/adminGroup'),
             },
-            {
-              path: 'exchange',//đổi số dư
-              name: 'exchange',
-              component: () => import('@/pages/systemConfig/adminGroup'),
-            },
+            // {
+            //   path: 'exchange',//đổi số dư
+            //   name: 'exchange',
+            //   component: () => import('@/pages/systemConfig/adminGroup'),
+            // },
 
           ]
         },
@@ -309,59 +309,59 @@ const options = {
           ]
         },
 
-        {
-          path: 'dashboard',
-          name: 'platform-home',
-          meta: {
-            icon: 'dashboard'
-          },
-          component: BlankView,
-          children: [
-            // {
-            //   path: 'workplace',
-            //   name: '工作台',
-            //   meta: {
-            //     page: {
-            //       closable: false
-            //     }
-            //   },
-            //   component: () => import('@/pages/dashboard/workplace'),
-            // },
-            {
-              path: 'analysis',
-              name: '分析页',
-              component: () => import('@/pages/dashboard/analysis'),
-            }
-          ]
-        },
-        {
-          path: 'form',
-          name: '表单页',
-          meta: {
-            icon: 'form',
-            page: {
-              cacheAble: false
-            }
-          },
-          component: PageView,
-          children: [
-            {
-              path: 'basic',
-              name: '基础表单',
-              component: () => import('@/pages/form/basic'),
-            },
-            {
-              path: 'step',
-              name: '分步表单',
-              component: () => import('@/pages/form/step'),
-            },
-            {
-              path: 'advance',
-              name: '高级表单',
-              component: () => import('@/pages/form/advance'),
-            }
-          ]
-        },
+        // {
+        //   path: 'dashboard',
+        //   name: 'platform-home',
+        //   meta: {
+        //     icon: 'dashboard'
+        //   },
+        //   component: BlankView,
+        //   children: [
+        //     // {
+        //     //   path: 'workplace',
+        //     //   name: '工作台',
+        //     //   meta: {
+        //     //     page: {
+        //     //       closable: false
+        //     //     }
+        //     //   },
+        //     //   component: () => import('@/pages/dashboard/workplace'),
+        //     // },
+        //     {
+        //       path: 'analysis',
+        //       name: '分析页',
+        //       component: () => import('@/pages/dashboard/analysis'),
+        //     }
+        //   ]
+        // },
+        // {
+        //   path: 'form',
+        //   name: '表单页',
+        //   meta: {
+        //     icon: 'form',
+        //     page: {
+        //       cacheAble: false
+        //     }
+        //   },
+        //   component: PageView,
+        //   children: [
+        //     {
+        //       path: 'basic',
+        //       name: '基础表单',
+        //       component: () => import('@/pages/form/basic'),
+        //     },
+        //     {
+        //       path: 'step',
+        //       name: '分步表单',
+        //       component: () => import('@/pages/form/step'),
+        //     },
+        //     {
+        //       path: 'advance',
+        //       name: '高级表单',
+        //       component: () => import('@/pages/form/advance'),
+        //     }
+        //   ]
+        // },
 
         {
           path: 'systemConfig',

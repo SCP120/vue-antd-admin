@@ -102,20 +102,20 @@ const columns = [
         width: "20%",
     },
     {
-        title: "Image",
-        dataIndex: "image",
-        key: "image",
-        scopedSlots: {customRender: "image-column"},
+        title: "Binding Fee",
+        dataIndex: "binding_fee",
     },
     {
-        title: "Public Date",
-        dataIndex: "date_public",
+        title: "Daily Profit",
+        dataIndex: "daily_profit",
+    },
+    {
+        title: "Mission",
+        dataIndex: "content",
         key: "date_public",
-        render: (record) => {
+        render: ({content}) => {
             return (
-                <div>
-                    <p>{moment(record.date_public).format("DD-MM-YYYY")}</p>
-                </div>
+                <div v-html={content}/>
             );
         },
     },
@@ -130,13 +130,6 @@ const columns = [
                 </div>
             );
         },
-    },
-    {
-        title: "Status",
-        dataIndex: "status",
-        key: "status",
-        scopedSlots: {customRender: "status-column"},
-        sorter: (a, b) => a.status.localeCompare(b.status),
     },
     {
         title: "Action",
@@ -173,7 +166,7 @@ export default {
             this.getData();
         },
         getData() {
-            request(process.env.VUE_APP_API_BASE_URL + "/campain", "get", {
+            request(process.env.VUE_APP_API_BASE_URL + "/campain-mission", "get", {
                 page: this.pagination.current,
                 pageSize: this.pagination.pageSize,
             }).then((res) => {

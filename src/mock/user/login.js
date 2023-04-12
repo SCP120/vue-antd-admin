@@ -27,13 +27,13 @@ Mock.mock(`${process.env.VUE_APP_API_BASE_URL}/login`, 'post', ({body}) => {
 
   if (success) {
     result.code = 0
-    result.message = Mock.mock('@TIMEFIX').CN + '，欢迎回来'
+    result.message = "Login successfully"
     result.data.user = user
     result.data.token = 'Authorization:' + Math.random()
     result.data.expireAt = new Date(new Date().getTime() + 30 * 60 * 1000)
   } else {
     result.code = -1
-    result.message = '账户名或密码错误（admin/888888 or test/888888）'
+    result.message = 'Username or password is incorrect.'
   }
   return result
 })
