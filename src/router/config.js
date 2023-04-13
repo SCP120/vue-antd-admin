@@ -258,7 +258,15 @@ const options = {
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/campaignMission/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/campaignMission/edit/edit'),
             },
 
           ]
@@ -282,7 +290,15 @@ const options = {
             {
               path: 'new',
               name: 'New',
-              component: () => import('@/pages/systemConfig/adminGroup'),
+              component: () => import('@/pages/agency/new/new'),
+            },
+            {
+              path: 'edit',
+              name: 'edit',
+              meta: {
+                invisible: true
+              },
+              component: () => import('@/pages/agency/edit/edit'),
             },
             // {
             //   path: 'exchange',//đổi số dư
