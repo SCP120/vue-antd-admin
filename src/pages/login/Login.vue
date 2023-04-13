@@ -130,7 +130,7 @@ export default {
             ]
           }]
           loadRoutes(routesConfig)
-          this.$router.push('/bank/list')
+          this.$router.push('/dashboard/analysis')
           this.$message.success(loginRes.message, 3)
           console.log(123)
           // })

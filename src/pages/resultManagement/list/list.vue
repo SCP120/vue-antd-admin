@@ -9,39 +9,49 @@
         <a-card>
             <div>
                 <a-space class="operator">
-                    <!-- <a-button @click="addNew" type="primary">Add new</a-button> -->
-                <!-- <a-dropdown>
+                        <!-- <a-button @click="addNew" type="primary">Add new</a-button> -->
+                        <!-- <a-dropdown>
                           <a-menu @click="handleMenuClick" slot="overlay">
                             <a-menu-item key="delete">删除</a-menu-item>
                             <a-menu-item key="audit">审批</a-menu-item>
                           </a-menu>
                           <a-button> 更多操作 <a-icon type="down" /> </a-button>
-                                </a-dropdown> -->
-                </a-space>
-                <standard-table :columns="columns" :dataSource="dataSource"
-                    :pagination="{ ...pagination, onChange: onPageChange }">
-                    <template slot="image-column" slot-scope="image">
-                        <img :src="image.text" />
+                        </a-dropdown> -->
+                      </a-space>
+                <standard-table
+                        :columns="columns"
+                        :dataSource="dataSource"
+
+
+                >
+                    <template slot="image-column" slot-scope="resuft">
+                        <img :src="JSON.parse(resuft[0][0])"/>
                     </template>
                     <template slot="status-column" slot-scope="status">
-                        <span v-if="status.text != 1" style="
-                      background-color: green;
-                      color: white;
-                      padding: 4px 8px;
-                      border-radius: 4px;
-                      display: inline-block;
-                    ">
-                            active
-                        </span>
-                        <span v-if="status.text == 1" style="
-                      background-color: red;
-                      color: white;
-                      padding: 4px 8px;
-                      border-radius: 4px;
-                      display: inline-block;
-                    ">
-                            inactive
-                        </span>
+          <span
+                  v-if="status.text != 1"
+                  style="
+              background-color: green;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              display: inline-block;
+            "
+          >
+            active
+          </span>
+                        <span
+                                v-if="status.text == 1"
+                                style="
+              background-color: red;
+              color: white;
+              padding: 4px 8px;
+              border-radius: 4px;
+              display: inline-block;
+            "
+                        >
+            inactive
+          </span>
                     </template>
 
                     <div slot="description" slot-scope="{ text }">
@@ -49,31 +59,33 @@
                     </div>
                     <div slot="action" slot-scope="{  record }">
                         <a style="margin-right: 8px">
-                            <a-icon type="edit" />
-                            <router-link :to="`/language/edit/edit/${record.id}`">edit
-                            </router-link>
+                            <a-icon type="edit"/>
+                            <router-link :to="`/language/edit/edit/${record.id}`"
+                            >edit
+                            </router-link
+                            >
                         </a>
                         <a @click="deleteRecord(record.id)">
-                            <a-icon type="delete" />
+                            <a-icon type="delete"/>
                             delete
                         </a>
-                    <!-- <a @click="deleteRecord(record.key)" v-auth="`delete`">
-                                    <a-icon type="delete" />删除2
-                                          </a> -->
                     </div>
                     <template slot="statusTitle">
-                        <a-icon @click.native="onStatusTitleClick" type="info-circle" />
+                        <a-icon @click.native="onStatusTitleClick" type="info-circle"/>
                     </template>
                 </standard-table>
             </div>
         </a-card>
     </div>
+
 </template>
 
 <script>
+
+
 import StandardTable from "@/components/table/StandardTable";
-import { request } from "@/utils/request";
-import moment from "moment";
+import {request} from "@/utils/request";
+
 const columns = [
     {
         title: "ID",
@@ -81,53 +93,49 @@ const columns = [
     },
     {
         title: "Name",
-        dataIndex: "name",
+        dataIndex: "campain_name",
         width: "20%",
     },
     {
-        title: "Binding Fee",
-        dataIndex: "binding_fee",
+        title: "User",
+        dataIndex: "user_name",
     },
     {
-        title: "Daily Profit",
-        dataIndex: "daily_profit",
+        title: "Amount",
+        dataIndex: "price",
     },
     {
-        title: "Mission",
-        dataIndex: "content",
+        title: "Explain",
+        dataIndex: "resuft_explain",
+        key: "resuft_explain",
+        // scopedSlots: {customRender: "image-column"},
+       
     },
     {
-        title: "End Date",
-        dataIndex: "date_end",
-        key: "date_end",
-        render: (record) => {
-            return (
-                <div>
-                    <p>{moment(record.date_end).format("DD-MM-YYYY")}</p>
-                </div>
-            );
-        },
+        title: "Image",
+        dataIndex: "resuft",
+        // scopedSlots: {customRender: "image-column"},
     },
     {
         title: "Action",
-        scopedSlots: { customRender: "action" },
+        scopedSlots: {customRender: "action"},
     },
 ];
 
 export default {
     name: "QueryList",
-    components: { StandardTable },
+    components: {StandardTable},
     data() {
         return {
             advanced: true,
             columns: columns,
             dataSource: [],
             selectedRows: [],
-            pagination: {
-                current: 1,
-                pageSize: 10,
-                total: 0,
-            },
+            // pagination: {
+            //     current: 1,
+            //     pageSize: 10,
+            //     total: 0,
+            // },
         };
     },
     // authorize: {
@@ -137,24 +145,24 @@ export default {
         this.getData();
     },
     methods: {
-        onPageChange(page, pageSize) {
-            this.pagination.current = page;
-            this.pagination.pageSize = pageSize;
+        onPageChange() {
+            // this.pagination.current = page;
+            // this.pagination.pageSize = pageSize;
             this.getData();
         },
         getData() {
-            request(process.env.VUE_APP_API_BASE_URL + "/campain-mission", "get", {
-                page: this.pagination.current,
-                pageSize: this.pagination.pageSize,
+            request(process.env.VUE_APP_API_BASE_URL + "/result", "get", {
+                // page: this.pagination.current,
+                // pageSize: this.pagination.pageSize,
             }).then((res) => {
-                const { data, current_page: page, per_page: pageSize, total } = res?.data?.items ?? {};
+                const data = res?.data?.items ?? {};
                 console.log(data);
-
+                
                 this.dataSource = data
 
-                this.pagination.current = page;
-                this.pagination.pageSize = pageSize;
-                this.pagination.total = total;
+                // this.pagination.current = page;
+                // this.pagination.pageSize = pageSize;
+                // this.pagination.total = total;
             });
         },
         deleteRecord(id) {
@@ -192,21 +200,21 @@ export default {
 
 <style lang="less" scoped>
 .search {
-    margin-bottom: 54px;
+  margin-bottom: 54px;
 }
 
 .fold {
-    width: calc(100% - 216px);
-    display: inline-block;
+  width: calc(100% - 216px);
+  display: inline-block;
 }
 
 .operator {
-    margin-bottom: 18px;
+  margin-bottom: 18px;
 }
 
 @media screen and (max-width: 900px) {
-    .fold {
-        width: 100%;
-    }
+  .fold {
+    width: 100%;
+  }
 }
 </style>
