@@ -69,7 +69,6 @@
 </template>
 
 <script>
-import Vue from "vue";
 
 
 import inputBox from "@/pages/campaigns/edit/inputbox.vue";

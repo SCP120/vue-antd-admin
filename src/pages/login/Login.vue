@@ -88,13 +88,13 @@ export default {
         this.logging = false
         const loginRes = res.data
         if (loginRes.status === "success") {
-          const { user, authorisation } = loginRes
+          const { user } = loginRes
           const permissions = [{ id: 'queryForm', operation: ['add', 'edit'] }]
           const roles = [{ id: 'admin', operation: ['add', 'edit', 'delete'] }]
           this.setUser(user)
           this.setPermissions(permissions)
           this.setRoles(roles)
-          setAuthorization({ token: authorisation.token, expireAt: new Date().getTime() + 1000 * 60 * 60 * 24 * 7 })
+          setAuthorization({ token: "gay", expireAt: new Date().getTime() + 1000 * 60 * 60 * 24 * 7 })
           // getRoutesConfig().then(result => {
           const routesConfig = [{
             router: 'root',

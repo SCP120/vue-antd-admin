@@ -1,7 +1,7 @@
 <template>
     <a-form @submit="handleSubmit" :form="form" class="form">
         <a-row class="form-row">
-            <a-col :lg="18" :md="18" :sm="24">
+            <a-col :lg="16" :md="16" :sm="24">
 
                 <a-form-item >
                     <a-row class="form-row">
@@ -14,13 +14,56 @@
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item  :label="$t('description')">
+                            <a-form-item  :label="$t('content')">
                                 <a-textarea rows="4"
                                     :value="data.name"
-                                    :placeholder="$ta('input|description')" @change="onChanged"
+                                    :placeholder="$ta('input|content')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
+
+                    </a-row>
+
+                </a-form-item>
+            </a-col>
+
+            <a-col :lg="8" :md="8" :sm="24">
+
+                <a-form-item >
+                    <a-row class="form-row">
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item  :label="$t('contractPrice')">
+                                <a-input
+                                    :value="data.name"
+                                    :placeholder="$ta('input|contractPrice')" @change="onChanged"
+                                />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item  :label="$t('revenueDay')">
+                                <a-input
+                                    :value="data.name"
+                                    :placeholder="$ta('input|revenueDay')" @change="onChanged"
+                                />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item  :label="$t('contractEndDate')">
+                                <a-input
+                                    :value="data.name"
+                                    :placeholder="$ta('input|contractEndDate')" @change="onChanged"
+                                />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item  :label="$t('name')">
+                                <a-input
+                                    :value="data.name"
+                                    :placeholder="$ta('input|name')" @change="onChanged"
+                                />
+                            </a-form-item>
+                        </a-col>
+
 
                     </a-row>
 

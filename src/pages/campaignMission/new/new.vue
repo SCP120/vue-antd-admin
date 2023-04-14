@@ -1,53 +1,9 @@
+<script src="i18n-inputBox.js"></script>
 <template>
     <div>
-        <a-card class="card"  :bordered="false">
-            <a-form>
-                <a-form-item :label="$t('name')" :labelCol="{ span: 7 }" :wrapperCol="{ span: 10 }">
-                    <a-input
-                        :placeholder="$t('nameInput')"
-                        name="name"
-                        :value="data.name"
-                        @change="onChanged"
-                    />
-                </a-form-item>
-                <a-form-item
-                    :label="$t('codeInput')"
-                    :labelCol="{ span: 7 }"
-                    :wrapperCol="{ span: 10 }"
-                >
-                    <a-input
-                        :placeholder="$t('codeInput')"
-                        :value="data.code"
-                        @change="onChanged"
-                        :name="'code'"
-                    />
-                </a-form-item>
 
-                <a-form-item
-                    :label="$t('image')"
-                    :labelCol="{ span: 7 }"
-                    :wrapperCol="{ span: 10 }"
-                >
-                </a-form-item>
-
-                <a-form-item style="margin-top: 24px" :wrapperCol="{ span: 10, offset: 7 }">
-                    <a-button style="margin-left: 8px" @click="send">{{ $t("save") }}</a-button>
-                </a-form-item>
-            </a-form>
-        </a-card>
-
-        <a-card
-            style="margin-top: 24px"
-            :bordered="false"
-            :tabList="tabList"
-            :activeTabKey="activeTabKey"
-            @tabChange="(key) => {this.activeTabKey = key}"
-        >
-
-            <input-box  v-if="activeTabKey === '1'" ref="inputBox" :langData="data" :showSubmit="true" :type="'VN'"/>
-            <input-box  v-if="activeTabKey === '2'" ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" />
-            <input-box  v-if="activeTabKey === '3'" ref="inputBox" :langData="data" :showSubmit="true" :type="'US'" />
-
+        <a-card>
+            <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VN'"/>
 
         </a-card>
 
@@ -60,7 +16,7 @@
 </template>
 
 <script>
-import inputBox from "@/pages/categories/new/inputbox.vue";
+import inputBox from "@/pages/campaignMission/new/inputbox.vue";
 
 
 export default {

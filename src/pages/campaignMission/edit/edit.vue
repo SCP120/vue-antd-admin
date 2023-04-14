@@ -1,62 +1,8 @@
 <template>
     <div>
-<!--        <a-card class="card"  :bordered="false">-->
-<!--            <a-form>-->
-<!--                <a-form-item :label="$t('name')" :labelCol="{ span: 7 }" :wrapperCol="{ span: 10 }">-->
-<!--                    <a-input-->
-<!--                            :placeholder="$t('nameInput')"-->
-<!--                            name="name"-->
-<!--                            :value="data.name"-->
-<!--                            @change="onChanged"-->
-<!--                    />-->
-<!--                </a-form-item>-->
-<!--                <a-form-item-->
-<!--                        :label="$t('codeInput')"-->
-<!--                        :labelCol="{ span: 7 }"-->
-<!--                        :wrapperCol="{ span: 10 }"-->
-<!--                >-->
-<!--                    <a-input-->
-<!--                            :placeholder="$t('codeInput')"-->
-<!--                            :value="data.code"-->
-<!--                            @change="onChanged"-->
-<!--                            :name="'code'"-->
-<!--                    />-->
-<!--                </a-form-item>-->
-
-<!--                <a-form-item-->
-<!--                        :label="$t('image')"-->
-<!--                        :labelCol="{ span: 7 }"-->
-<!--                        :wrapperCol="{ span: 10 }"-->
-<!--                >-->
-<!--                </a-form-item>-->
-
-<!--                <a-form-item style="margin-top: 24px" :wrapperCol="{ span: 10, offset: 7 }">-->
-<!--                    <a-button style="margin-left: 8px" @click="send">{{ $t("save") }}</a-button>-->
-<!--                </a-form-item>-->
-<!--            </a-form>-->
-<!--        </a-card>-->
-
-<!--        <a-card-->
-<!--            style="margin-top: 24px"-->
-<!--            :bordered="false"-->
-<!--            :tabList="tabList"-->
-<!--            :activeTabKey="activeTabKey.value"-->
-<!--            @tabChange="key => onTabChange(key, 'key')"-->
-<!--        >-->
-
-<!--            <input-box  v-if="activeTabKey.value === '1'" ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/>-->
-<!--            <input-box  v-else-if="activeTabKey.value === '2'" ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" />-->
-<!--            <input-box  v-else-if="activeTabKey.value === '3'" ref="inputBox" :langData="data" :showSubmit="true" :type="'EN'" />-->
-
-
-<!--        </a-card>-->
         <a-card>
-            <a-tabs >
-                <a-tab-pane key="1" tab="Tab 1" > <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/></a-tab-pane>
-                <a-tab-pane key="2" tab="Tab 2" > <input-box  ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" /></a-tab-pane>
-                <a-tab-pane key="3" tab="Tab 3"><input-box   ref="inputBox" :langData="data" :showSubmit="true" :type="'EN'" /></a-tab-pane>
+            <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VN'"/>
 
-            </a-tabs>
         </a-card>
 
 
@@ -69,10 +15,9 @@
 </template>
 
 <script>
-import Vue from "vue";
 
 
-import inputBox from "@/pages/campaigns/edit/inputbox.vue";
+import inputBox from "@/pages/campaignMission/edit/inputbox.vue";
 
 export default {
   name: "BasicForm",
@@ -101,29 +46,16 @@ export default {
       console.log(activeTabKey)
 
     const data = {
-        "id": 96,
-        "name": "McCann Asia",
-        "description": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-        "reson_cancel": "Không đáp ứng đủ các điều kiện ghi nhận kết quả được tính hoa hồng.\nKhông thực hiện nhiệm vụ 3 ngày liên tiếp, và dưới 25 ngày trong 1 tháng\nDùng tài khoản facebook, zalo không chính chủ( acc clone, tạo mới)\nNếu phát hiện Publisher có hành vi gian lận, tạo nhiều tài khoản, hoặc vi phạm các quy định về chạy quảng cáo thì sẽ bị ngưng quyền chạy chiến dịch ngay lập tức \nPublisher vẫn sẽ được hoàn lại phí ràng buộc hợp đồng ban đầu",
-        "short_content": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-        "link_": null,
-        "image": null,
-        "list_task": "{\"en\":[null,\"3\"],\"vi\":[null,null],\"cn\":[null,null]}",
-        "date_public": null,
-        "date_end": null,
-        "price_day": null,
-        "registration_fee": 2000000,
-        "code": null,
-        "price": 70000,
+        "id": 2,
+        "name": "English",
+        "code": "en",
+        "image": "/upload/images/files/download%20(1).png",
+        "value": "{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}",
+        "page_value": "{\"All\":{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}}",
         "status": null,
-        "users": "[3,1]",
-        "created_at": "2023-03-03 14:54:30",
-        "updated_at": "2023-03-10 11:13:36",
-        "category": 6,
-        "mission_id": null,
-        "is_hot": 0,
-        "is_beginner": 0,
-        "campain_category": null,
+        "created_at": "2023-02-14 22:10:59",
+        "updated_at": "2023-03-03 14:07:10",
+        "test": ""
     };
 
     return {
