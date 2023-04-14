@@ -14,44 +14,51 @@
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item :label="$t('description')">
-                                <a-textarea rows="4"
-                                            :value="data.description"
-                                            :placeholder="$ta('input|description')" @change="onChanged"
+                            <a-form-item :label="$t('email')">
+                                <a-input
+                                    :value="data.email"
+                                    :placeholder="$ta('input|email')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item :label="$t('shortContent')">
+                            <a-form-item :label="$t('phone')">
                                 <a-input
-                                        :value="data.short_content"
-                                        :placeholder="$ta('input|shortContent')" @change="onChanged"
+                                        :value="data.phone"
+                                        :placeholder="$ta('input|phone')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item :label="$t('link')">
+                            <a-form-item :label="$t('password')">
                                 <a-input
-                                    :value="data.link_"
-                                    :placeholder="$ta('input|link')" @change="onChanged"
+                                    :value="data.password"
+                                    :placeholder="$ta('input|password')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('password')">
+                                <a-select  @change="changeGender"   :value="data.gender" style="width: 120px" ref="select">
+                                    <a-select-option value="female">Female</a-select-option>
+                                    <a-select-option value="male">Male</a-select-option>
 
+                                </a-select>
+                            </a-form-item>
+                        </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item :label="$t('list_task_add')">
+                            <a-form-item :label="$t('bank_name_account')">
                                 <a-input
-                                    :placeholder="$ta('input|list_task_add')" @change="onChanged"
+                                    :value="data.bank_name_account"
+                                    :placeholder="$ta('input|bank_name_account')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
-
-                        <a-col :lg="24" :md="24" :sm="24"  >
-                            <a-form-item   v-for="(item , index) in data.list_task" :key="index">
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('bank_name')">
                                 <a-input
-                                    :value="item"
-                                    v-if="item != null"
-                                    :placeholder="$ta('input|list_task_add')" @change="onChanged"
+                                    :value="data.bank_name"
+                                    :placeholder="$ta('input|bank_name')" @change="onChanged"
                                 />
                             </a-form-item>
                         </a-col>
@@ -107,6 +114,9 @@ export default {
         }
     },
     methods: {
+        changeGender(value) {
+            this.data.gender = value;
+        },
         isJson(item) {
             let value = typeof item !== "string" ? JSON.stringify(item) : item;
             try {
@@ -126,11 +136,11 @@ export default {
             })
         },
         send() {
-            this.data.page_value.All = JSON.stringify(this.value);
 
             console.log(this.value);
             console.log(this.data);
         },
+
         setNestedProperty(event) {
             // Split the property path by dots to get an array of property names
             const properties = event.target.name.split(".");

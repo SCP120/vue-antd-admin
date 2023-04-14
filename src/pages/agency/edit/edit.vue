@@ -1,3 +1,4 @@
+<script src="i18n-inputBox.js"></script>
 <template>
     <div>
 <!--        <a-card class="card"  :bordered="false">-->
@@ -51,12 +52,7 @@
 
 <!--        </a-card>-->
         <a-card>
-            <a-tabs >
-                <a-tab-pane key="1" tab="Tab 1" > <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/></a-tab-pane>
-                <a-tab-pane key="2" tab="Tab 2" > <input-box  ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" /></a-tab-pane>
-                <a-tab-pane key="3" tab="Tab 3"><input-box   ref="inputBox" :langData="data" :showSubmit="true" :type="'EN'" /></a-tab-pane>
-
-            </a-tabs>
+            <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/>
         </a-card>
 
 
@@ -71,7 +67,7 @@
 <script>
 
 
-import inputBox from "@/pages/campaigns/edit/inputbox.vue";
+import inputBox from "@/pages/agency/edit/inputbox.vue";
 
 export default {
   name: "BasicForm",
@@ -99,33 +95,38 @@ export default {
 
       console.log(activeTabKey)
 
-    const data = {
-        "id": 96,
-        "name": "McCann Asia",
-        "description": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-        "reson_cancel": "Không đáp ứng đủ các điều kiện ghi nhận kết quả được tính hoa hồng.\nKhông thực hiện nhiệm vụ 3 ngày liên tiếp, và dưới 25 ngày trong 1 tháng\nDùng tài khoản facebook, zalo không chính chủ( acc clone, tạo mới)\nNếu phát hiện Publisher có hành vi gian lận, tạo nhiều tài khoản, hoặc vi phạm các quy định về chạy quảng cáo thì sẽ bị ngưng quyền chạy chiến dịch ngay lập tức \nPublisher vẫn sẽ được hoàn lại phí ràng buộc hợp đồng ban đầu",
-        "short_content": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-        "link_": null,
-        "image": null,
-        "list_task": "{\"en\":[null,\"3\"],\"vi\":[null,null],\"cn\":[null,null]}",
-        "date_public": null,
-        "date_end": null,
-        "price_day": null,
-        "registration_fee": 2000000,
-        "code": null,
-        "price": 70000,
-        "status": null,
-        "users": "[3,1]",
-        "created_at": "2023-03-03 14:54:30",
-        "updated_at": "2023-03-10 11:13:36",
-        "category": 6,
-        "mission_id": null,
-        "is_hot": 0,
-        "is_beginner": 0,
-        "campain_category": null,
-    };
+    const data =
+      {
+          "id" : 1,
+          "name" : "Supper Admin",
+          "email" : "admin@gmail.com",
+          "email_verified_at" : null,
+          "password" : "$2y$10$HI0cA/3UHAlQOBy/CYUIiOxr4OLoUGrykgxZhYMLEZNlIwOt7Ng/S",
+          "remember_token" : null,
+          "status" : null,
+          "type" : "super-admin",
+          "amount" : 34700000,
+          "image" : "upload/user/1/1678354562.jpg",
+          "campains" : "[\"1\",\"96\"]",
+          "created_at" : "2023-02-08 06:57:08",
+          "updated_at" : "2023-04-12 21:26:44",
+          "phone" : "0985895640",
+          "address" : "123321",
+          "close_account" : null,
+          "url" : null,
+          "bank_account" : "221",
+          "bank_name" : "Agribank, VBARD",
+          "bank_name_account" : "123",
+          "gender" : "Female",
+          "is_beginner" : 1,
+          "referral_code" : null,
+          "parent_referral_code" : null,
+          "last_login_time" : "2023-04-12 21:26:44",
+          "last_login_ip" : "127.0.0.1"
+      }
 
-    return {
+
+      return {
         tabList,
 
 
