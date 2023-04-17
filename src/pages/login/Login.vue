@@ -88,13 +88,13 @@ export default {
         this.logging = false
         const loginRes = res.data
         if (loginRes.status === "success") {
-          const { user } = loginRes
+          const { user, authorisation } = loginRes
           const permissions = [{ id: 'queryForm', operation: ['add', 'edit'] }]
           const roles = [{ id: 'admin', operation: ['add', 'edit', 'delete'] }]
           this.setUser(user)
           this.setPermissions(permissions)
           this.setRoles(roles)
-          setAuthorization({ token: "gay", expireAt: new Date().getTime() + 1000 * 60 * 60 * 24 * 7 })
+          setAuthorization({ token: authorisation.token, expireAt: new Date().getTime() + 1000 * 60 * 60 * 24 * 7 })
           // getRoutesConfig().then(result => {
           const routesConfig = [{
             router: 'root',
@@ -132,7 +132,10 @@ export default {
           loadRoutes(routesConfig)
           this.$router.push('/dashboard/analysis')
           this.$message.success(loginRes.message, 3)
-          console.log(123)
+          //reload the page
+          setTimeout(() => {
+            window.location.reload()
+          }, 1000)
           // })
         } else {
           this.error = loginRes.message

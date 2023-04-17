@@ -1,23 +1,15 @@
 <script src="i18n-inputBox.js"></script>
 <template>
     <div>
-
         <a-card>
             <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VN'"/>
-
         </a-card>
-
-
-
     </div>
-
-
-
 </template>
 
 <script>
 import inputBox from "@/pages/campaignMission/new/inputbox.vue";
-
+import { request } from "@/utils/request";
 
 export default {
     name: "BasicForm",
@@ -39,28 +31,26 @@ export default {
             }
         ];
         const data = {
-            "id": 2,
-            "name": "English",
-            "code": "en",
-            "image": "/upload/images/files/download%20(1).png",
-            "value": "{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}",
-            "page_value": "{\"All\":{\"All.language\":\"Language\",\"All.save\":\"Save\",\"All.name\":\"Name\",\"All.image\":\"Image\",\"All.code\":\"Code\",\"All.category_new\":\"Category New\",\"All.blog\":\"Blog\",\"All.campain\":\"Campain\",\"All.agency\":\"Agency\",\"All.payment\":\"Payment\",\"All.list\":\"List\",\"All.create\":\"Create\",\"All.new\":\"New\",\"All.edit\":\"Edit\",\"All.delete\":\"Delete\"}}",
-            "status": null,
-            "created_at": "2023-02-14 22:10:59",
-            "updated_at": "2023-03-03 14:07:10",
-            "test": ""
         };
-        const value = JSON.parse(data.value);
-        const page_value = JSON.parse(data.page_value);
         return {
             tabList,
             data,
-            value,
             activeTabKey: '1',
-            page_value,
+            id: this.$router.history.current.query.id || null
         };
     },
     methods: {
+        getData() {
+            if (this.id) {
+                console.log("Handler")
+                request(process.env.VUE_APP_API_BASE_URL + "/campain-mission/" + this.id, "get").then((res) => {
+                    const data = res?.data?.item ?? {};
+                    this.data = {
+                        ...data,
+                    }
+                });
+            }
+        },
         send() {
             console.log(this.data);
         },
@@ -112,6 +102,9 @@ export default {
         desc() {
             return this.$t("pageDesc");
         },
+    },
+    mounted() {
+        this.getData();
     },
 };
 </script>

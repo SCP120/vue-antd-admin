@@ -7,63 +7,84 @@
                     <a-row class="form-row">
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item :label="$t('name')">
-                                <a-input
-                                    :value="data.name"
-                                    :placeholder="$ta('input|name')" @change="onChanged"
-                                />
+                                <a-input :value="data.name" :placeholder="$ta('name')" @change="onChanged" name="name" />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item :label="$t('description')">
-                                <a-textarea rows="4"
-                                            :value="data.description"
-                                            :placeholder="$ta('input|description')" @change="onChanged"
-                                />
+                                <a-textarea rows="4" :value="data.description" name="description"
+                                    :placeholder="$ta('description')" @change="onChanged" />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item :label="$t('shortContent')">
-                                <a-input
-                                    :value="data.short_content"
-                                    :placeholder="$ta('input|shortContent')" @change="onChanged"
-                                />
+                                <a-input name="short_content" :value="data.short_content" :placeholder="$ta('shortContent')"
+                                    @change="onChanged" />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('publicDate')">
+                                <a-input name="date_public" :value="data.publicDate" :placeholder="$ta('publicDate')"
+                                    @change="onChanged" />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item :label="$t('link')">
-                                <a-input
-                                    :value="data.link_"
-                                    :placeholder="$ta('input|link')" @change="onChanged"
-                                />
+                                <a-input name="link_" :value="data.link_" :placeholder="$ta('link')" @change="onChanged" />
                             </a-form-item>
                         </a-col>
-
                         <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item :label="$t('list_task_add')">
-                                <a-input
-                                    :placeholder="$ta('input|list_task_add')" @change="onChanged"
-                                />
+                            <a-form-item :label="$t('task')">
+                                <a-input name="task" :value="data.task" :placeholder="$ta('task')" @change="onChanged" />
                             </a-form-item>
                         </a-col>
-
-                        <a-col :lg="24" :md="24" :sm="24"  >
-                            <a-form-item   v-for="(item , index) in data.list_task" :key="index">
-                                <a-input
-                                    :value="item"
-                                    v-if="item != null"
-                                    :placeholder="$ta('input|list_task_add')" @change="onChanged"
-                                />
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('imageLink')">
+                                <a-input name="image" :value="data.imageLink" :placeholder="$ta('imageLink')"
+                                    @change="onChanged" />
                             </a-form-item>
                         </a-col>
-
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('price')">
+                                <a-input name="price" :value="data.price" :placeholder="$ta('price')" @change="onChanged" />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('mission')">
+                                <a-select name="mission_id" :placeholder="$ta('mission')" @change="onChangeMission"
+                                    :value="data.mission">
+                                    <a-select-option v-for="(item) in missions" :key="item.value" :value="item.value">
+                                        {{ item.label }}
+                                    </a-select-option>
+                                </a-select>
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('category')">
+                                <a-select name="category" :placeholder="$ta('category')" @change="onChangeCategory"
+                                    :value="data.category">
+                                    <a-select-option v-for="(item) in categories" :key="item.value" :value="item.value">
+                                        {{ item.label }}
+                                    </a-select-option>
+                                </a-select>
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('isHot')">
+                                <a-input name="is_hot" :value="data.isHot" :placeholder="$ta('isHot')" @change="onChanged"
+                                    type="checkbox" />
+                            </a-form-item>
+                        </a-col>
+                        <a-col :lg="24" :md="24" :sm="24">
+                            <a-form-item :label="$t('isBeginner')">
+                                <a-input name="is_beginner" :value="data.isBeginner" :placeholder="$ta('isBeginner')"
+                                    @change="onChanged" type="checkbox" />
+                            </a-form-item>
+                        </a-col>
                     </a-row>
-
                 </a-form-item>
             </a-col>
-
-
         </a-row>
-
         <a-form-item v-if="showSubmit">
             <a-button htmlType="submit" @click="send">Submit</a-button>
         </a-form-item>
@@ -71,13 +92,14 @@
 </template>
 
 <script>
+import { METHOD, request } from '../../../utils/request';
+
 export default {
     name: 'inputBox',
-    props: ['showSubmit', "langData", "type"],
+    props: ['showSubmit', "langData", "type", "categories", 'missions', "campainId"],
     i18n: require('./i18n-inputBox.js'),
     data() {
-        const data ={... this.langData};
-        console.log(data)
+        const data = { ... this.langData };
 
         Object.keys(data).forEach(key => {
             if (this.isJson(data[key])) {
@@ -85,28 +107,39 @@ export default {
                 data[key] = JSON.parse(data[key])
                 console.log(this.type.toLowerCase())
 
-                if (data[key][this.type.toLowerCase()] ){
+                if (data[key][this.type.toLowerCase()]) {
                     data[key] = data[key][this.type.toLowerCase()]
                 }
             }
         });
-
-        console.log(data)
-
-        // const short_content = JSON.parse(preProcessdata.short_content);
-        // const reson_cancel = JSON.parse(preProcessdata.reson_cancel);
-
-        // console.log(data);
-
-
-
         return {
             data,
-
             form: this.$form.createForm(this)
         }
     },
+    watch: {
+        langData: {
+            handler: function (val,) {
+                this.data = { ...val };
+                Object.keys(this.data).forEach(key => {
+                    if (this.isJson(this.data[key])) {
+                        this.data[key] = JSON.parse(this.data[key])
+                        if (this.data[key][this.type.toLowerCase()]) {
+                            this.data[key] = this.data[key][this.type.toLowerCase()]
+                        }
+                    }
+                });
+            },
+            deep: true
+        }
+    },
     methods: {
+        onChangeCategory(value) {
+            this.data.category = value
+        },
+        onChangeMission(value) {
+            this.data.mission = value
+        },
         isJson(item) {
             let value = typeof item !== "string" ? JSON.stringify(item) : item;
             try {
@@ -126,10 +159,25 @@ export default {
             })
         },
         send() {
-            this.data.page_value.All = JSON.stringify(this.value);
-
-            console.log(this.value);
-            console.log(this.data);
+            // return console.log(this.data)
+            const data = {
+                ...this.data,
+                is_beginner: this.data.is_beginner,
+                is_hot: this.data.is_hot,
+                mission_id: this.data.mission,
+                image: this.data.image,
+                task: this.data.task,
+                date_public: this.data.date_public,
+            }
+            if(this.campainId) {
+                data.id = this.campainId
+            }
+            request(
+                process.env.VUE_APP_API_BASE_URL + '/campain',
+                METHOD.POST,
+                data).then(res => {
+                    console.log(res)
+                })
         },
         setNestedProperty(event) {
             // Split the property path by dots to get an array of property names

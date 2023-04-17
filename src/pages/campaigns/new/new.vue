@@ -1,95 +1,99 @@
 <template>
     <div>
         <a-card>
-            <a-tabs >
-                <a-tab-pane key="1" tab="Tab 1" > <input-box ref="inputBox" :langData="data" :showSubmit="true" :type="'VI'"/></a-tab-pane>
-                <a-tab-pane key="2" tab="Tab 2" > <input-box  ref="inputBox" :langData="data" :showSubmit="true" :type="'CN'" /></a-tab-pane>
-                <a-tab-pane key="3" tab="Tab 3"><input-box   ref="inputBox" :langData="data" :showSubmit="true" :type="'EN'" /></a-tab-pane>
-
+            <a-tabs>
+                <a-tab-pane key="1" tab="Campaign"> <input-box ref="inputBox" :langData="data" :showSubmit="true"
+                        :missions="missions" :categories="categories" :type="'VI'" :campainId="id"/></a-tab-pane>
+                <!-- <a-tab-pane key="2" tab="Tab 2"> <input-box ref="inputBox" :langData="data" :showSubmit="true"
+                        :missions="missions" :categories="categories" :type="'CN'" /></a-tab-pane>
+                <a-tab-pane key="3" tab="Tab 3"><input-box ref="inputBox" :langData="data" :showSubmit="true"
+                        :missions="missions" :categories="categories" :type="'EN'" /></a-tab-pane> -->
             </a-tabs>
         </a-card>
-
-
-
-
     </div>
-
-
-
 </template>
 
 <script>
 
 
 import inputBox from "@/pages/campaigns/new/inputbox.vue";
-
+import { request } from "@/utils/request";
+import _ from "lodash";
 
 export default {
     name: "BasicForm",
-    components: {inputBox},
+    components: { inputBox },
     i18n: require("./i18n"),
-
+   
     data() {
-
         const tabList = [
             {
                 key: '1',
                 tab: 'VN'
             },
-            {
-                key: '2',
-                tab: 'CN'
-            },
-            {
-                key: '3',
-                tab: 'US'
-            }
+            // {
+            //     key: '2',
+            //     tab: 'CN'
+            // },
+            // {
+            //     key: '3',
+            //     tab: 'US'
+            // }
         ];
         const activeTabKey = '1';
         const noTitleKey = 'app';
-
-        console.log(activeTabKey)
-
-        const data = {
-            "id": 96,
-            "name": "McCann Asia",
-            "description": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-            "reson_cancel": "Không đáp ứng đủ các điều kiện ghi nhận kết quả được tính hoa hồng.\nKhông thực hiện nhiệm vụ 3 ngày liên tiếp, và dưới 25 ngày trong 1 tháng\nDùng tài khoản facebook, zalo không chính chủ( acc clone, tạo mới)\nNếu phát hiện Publisher có hành vi gian lận, tạo nhiều tài khoản, hoặc vi phạm các quy định về chạy quảng cáo thì sẽ bị ngưng quyền chạy chiến dịch ngay lập tức \nPublisher vẫn sẽ được hoàn lại phí ràng buộc hợp đồng ban đầu",
-            "short_content": "McCann Asia là một nền tảng trung gian kết nối các công ty thương mại và dịch vụ trực tuyến về thương mại điện tử, bán lẻ, ngân hàng và tài chính…và đặt chỗ trực tuyến vơi các đối tác phương tiện truyền thông để quảng bá sản phẩm đến người dùng.\nMcCann Asia là nền tảng quảng cáo lớn và uy tín nhất Châu Á với hơn 2.000.000 thành viên và hàng trăm chiến dịch tham gia.",
-            "link_": null,
-            "image": null,
-            "list_task": "{\"en\":[null,\"3\"],\"vi\":[null,null],\"cn\":[null,null]}",
-            "date_public": null,
-            "date_end": null,
-            "price_day": null,
-            "registration_fee": 2000000,
-            "code": null,
-            "price": 70000,
-            "status": null,
-            "users": "[3,1]",
-            "created_at": "2023-03-03 14:54:30",
-            "updated_at": "2023-03-10 11:13:36",
-            "category": 6,
-            "mission_id": null,
-            "is_hot": 0,
-            "is_beginner": 0,
-            "campain_category": null,
-        };
+        const data = {}
 
         return {
             tabList,
-
-
             activeTabKey,
             noTitleKey,
-
             data,
+            categories: [],
+            missions: [],
+            id: this.$router.history.current.query.id || null
         };
     },
 
     methods: {
+        getData() {
+            if (this.id) {
+                request(process.env.VUE_APP_API_BASE_URL + "/campain/" + this.id, "get").then((res) => {
+                    const data = res?.data?.item ?? {};
+                    this.data = {
+                        ...data,
+                        name: JSON.parse(data.name),
+                        description: JSON.parse(data.description),
+                        image: JSON.parse(data.image),
+                        short_content: JSON.parse(data.short_content),
+                        task: JSON.parse(data.list_task),
+                        publicDate: data.date_public,
+                        mission: data.mission_id,
+                        imageLink: data.image
+                    }
+                });
+            }
+            request(process.env.VUE_APP_API_BASE_URL + "/campain/get-info-create", "get").then((res) => {
+                const { categories, missions } = res?.data?.data ?? {};
+                console.log({
+                    categories,
+                    missions
+                })
+                this.categories = _.map(categories, (item, key) => {
+                    return {
+                        label: item,
+                        value: key
+                    }
+                });
+                this.missions = _.map(missions, (item, key) => {
+                    return {
+                        label: item,
+                        value: key
+                    }
+                });
+            });
+        },
         onTabChange(value, type) {
-            console.log(value, type);
             if (type === 'key') {
                 this.activeTabKey.value = value;
             } else if (type === 'noTitleKey') {
@@ -148,11 +152,14 @@ export default {
             return this.$t("pageDesc");
         },
     },
+    mounted() {
+        this.getData();
+    },
 };
 </script>
 
 <style lang="less" scoped>
-.card{
+.card {
     margin-bottom: 24px;
 }
 </style>

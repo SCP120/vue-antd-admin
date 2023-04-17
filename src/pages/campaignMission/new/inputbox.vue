@@ -9,15 +9,17 @@
                             <a-form-item  :label="$t('name')">
                                 <a-input
                                     :value="data.name"
-                                    :placeholder="$ta('input|name')" @change="onChanged"
+                                    @change="onChanged"
+                                    name="name"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item  :label="$t('content')">
                                 <a-textarea rows="4"
-                                    :value="data.name"
-                                    :placeholder="$ta('input|content')" @change="onChanged"
+                                    :value="data.content"
+                                    @change="onChanged"
+                                    name="content"
                                 />
                             </a-form-item>
                         </a-col>
@@ -34,45 +36,34 @@
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item  :label="$t('contractPrice')">
                                 <a-input
-                                    :value="data.name"
-                                    :placeholder="$ta('input|contractPrice')" @change="onChanged"
+                                    :value="data.binding_fee"
+                                    @change="onChanged"
+                                    name="binding_fee"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item  :label="$t('revenueDay')">
                                 <a-input
-                                    :value="data.name"
-                                    :placeholder="$ta('input|revenueDay')" @change="onChanged"
+                                    :value="data.daily_profit"
+                                    @change="onChanged"
+                                    name="daily_profit"
                                 />
                             </a-form-item>
                         </a-col>
                         <a-col :lg="24" :md="24" :sm="24">
                             <a-form-item  :label="$t('contractEndDate')">
                                 <a-input
-                                    :value="data.name"
-                                    :placeholder="$ta('input|contractEndDate')" @change="onChanged"
+                                    :value="data.contract_term"
+                                    @change="onChanged"
+                                    name="contract_term"
                                 />
                             </a-form-item>
                         </a-col>
-                        <a-col :lg="24" :md="24" :sm="24">
-                            <a-form-item  :label="$t('name')">
-                                <a-input
-                                    :value="data.name"
-                                    :placeholder="$ta('input|name')" @change="onChanged"
-                                />
-                            </a-form-item>
-                        </a-col>
-
-
                     </a-row>
-
                 </a-form-item>
             </a-col>
-            
-
         </a-row>
-
         <a-form-item v-if="showSubmit">
             <a-button htmlType="submit" @click="send">Submit</a-button>
         </a-form-item>
@@ -80,20 +71,25 @@
 </template>
 
 <script>
+import { METHOD, request } from '../../../utils/request';
+
 export default {
     name: 'inputBox',
-    props: ['showSubmit', "langData", "type"],
+    props: ['showSubmit', "langData", "type", "campainMissionId"],
     i18n: require('./i18n-inputBox.js'),
     data() {
         const data = this.langData;
-        console.log(data);
-        const value = JSON.parse(data.page_value).All;
-
         return {
             data,
-            value,
-
             form: this.$form.createForm(this)
+        }
+    },
+    watch: {
+        langData: {
+            handler: function (val) {
+                this.data = val;
+            },
+            deep: true
         }
     },
     methods: {
@@ -106,10 +102,18 @@ export default {
             })
         },
         send() {
-            this.data.page_value.All= JSON.stringify(this.value);
-
-            console.log(this.value);
-            console.log(this.data);
+            const data = {
+                ...this.data,
+            }
+            if(this.campainMissionId) {
+                data.id = this.campainMissionId
+            }
+            request(
+                process.env.VUE_APP_API_BASE_URL + '/campain-mission',
+                METHOD.POST,
+                data).then(res => {
+                    console.log(res)
+                })
         },
         setNestedProperty(event) {
             // Split the property path by dots to get an array of property names
