@@ -36,9 +36,6 @@
           <a-button :loading="logging" style="width: 100%;margin-top: 24px" size="large" htmlType="submit"
             type="primary">Login</a-button>
         </a-form-item>
-          <a-form-item>
-              <modal></modal>
-          </a-form-item>
 
         <!-- <div>
           其他登录方式
@@ -58,11 +55,10 @@ import { login } from '@/services/user'
 import { setAuthorization } from '@/utils/request'
 import { loadRoutes } from '@/utils/routerUtil'
 import { mapMutations } from 'vuex'
-import Modal from './modal.vue'
 
 export default {
   name: 'Login',
-  components: { CommonLayout, Modal },
+  components: { CommonLayout },
   data() {
     return {
       logging: false,
