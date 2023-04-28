@@ -1,8 +1,12 @@
 <template>
     <div key="2">
-        <a-modal :visible="showModal" :title="$t('modalTitle')">
+        <a-modal :closable="false" :visible="showModal" :title="$t('modalTitle')">
             <div style="display: flex; justify-content: center; margin-bottom: 20px;">
                 <a-range-picker :style="{ width: '256px' }" v-model="myCustomDate"></a-range-picker>
+            </div>
+            <div style="display: flex; justify-content: center; margin-bottom: 20px;">
+                <h4 class="title" style="padding-right: 10px;">{{ user.name }}</h4>
+                <span> (MGT: <strong>{{ user.referral_code }}</strong>)</span>
             </div>
             <ranking-list :list="info" />
             <template #footer>
@@ -25,6 +29,7 @@ export default {
         return {
             data: {},
             info: [],
+            user: {},
             form: this.$form.createForm(this),
             myCustomDate: [null, null],
             from: null,
@@ -60,8 +65,8 @@ export default {
             }
             request(uri, "get", {
             }).then((res) => {
-                const { data } = res?.data ?? {};
-
+                const { data, user } = res?.data ?? {};
+                this.user = user;
                 this.info = Object.keys(data).map((key) => {
                     const value = formatCurrencyVND(data[key] || 0);
                     return {
@@ -143,6 +148,10 @@ export default {
 
         handleOk() {
             if (this.data.amount > 0) {
+                const confirm = window.confirm("Are you sure?");
+                if (!confirm) {
+                    return;
+                }
                 request(process.env.VUE_APP_API_BASE_URL + "/agency/change-amount/" + this.id, METHOD.PUT, {
                     amount: this.data.amount,
                     type: this.data.type
